@@ -1,0 +1,470 @@
+<!DOCTYPE html>
+<html lang="kk">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+    <title>Kali Linux мүмкіндіктері | Презентация</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', 'Poppins', system-ui, -apple-system, BlinkMacSystemFont, 'Roboto', sans-serif;
+            background: radial-gradient(circle at 10% 20%, #0a0f1e, #03060c);
+            color: #f0f3fa;
+            overflow: hidden;
+            height: 100vh;
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .presentation-container {
+            position: relative;
+            width: 100%;
+            height: 100%;
+            overflow: hidden;
+        }
+
+        .slides-wrapper {
+            display: flex;
+            width: 100%;
+            height: 100%;
+            transition: transform 0.5s cubic-bezier(0.2, 0.9, 0.4, 1.1);
+        }
+
+        .slide {
+            min-width: 100%;
+            height: 100%;
+            overflow-y: auto;
+            padding: 2rem 3rem;
+            scrollbar-width: thin;
+            animation: fadeInUp 0.6s ease-out;
+        }
+
+        .slide::-webkit-scrollbar {
+            width: 6px;
+        }
+
+        .slide::-webkit-scrollbar-track {
+            background: #1e2a3a;
+            border-radius: 8px;
+        }
+
+        .slide::-webkit-scrollbar-thumb {
+            background: linear-gradient(135deg, #a855f7, #3b82f6);
+            border-radius: 8px;
+        }
+
+        h1 {
+            font-size: 3.6rem;
+            background: linear-gradient(135deg, #c084fc, #60a5fa, #34d399);
+            background-clip: text;
+            -webkit-background-clip: text;
+            color: transparent;
+            margin-bottom: 1rem;
+            letter-spacing: -0.02em;
+        }
+
+        h2 {
+            font-size: 2rem;
+            margin: 1rem 0 0.75rem;
+            border-left: 5px solid #a855f7;
+            padding-left: 1rem;
+            color: #e2e8ff;
+        }
+
+        p, li {
+            font-size: 1.15rem;
+            line-height: 1.5;
+            margin: 0.6rem 0;
+            color: #cbd5e6;
+        }
+
+        .grid-2 {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 1.5rem;
+            margin: 1.5rem 0;
+        }
+
+        .card {
+            background: rgba(15, 23, 42, 0.7);
+            backdrop-filter: blur(8px);
+            border-radius: 1.2rem;
+            padding: 1.2rem 1.5rem;
+            border: 1px solid #334155;
+            transition: all 0.25s ease;
+        }
+
+        .card:hover {
+            transform: translateY(-6px);
+            border-color: #a855f7;
+            box-shadow: 0 10px 25px -5px rgba(168, 85, 247, 0.3);
+        }
+
+        .card strong {
+            color: #facc15;
+            font-size: 1.2rem;
+            display: block;
+            margin-bottom: 0.4rem;
+        }
+
+        .badge {
+            background: #1e293b;
+            padding: 0.2rem 0.8rem;
+            border-radius: 40px;
+            font-size: 0.8rem;
+            display: inline-block;
+            margin-bottom: 0.8rem;
+            border-left: 3px solid #a855f7;
+        }
+
+        code {
+            background: #0f172a;
+            padding: 0.2rem 0.5rem;
+            border-radius: 8px;
+            font-family: 'Fira Code', 'Courier New', monospace;
+            color: #facc15;
+            font-size: 0.95rem;
+        }
+
+        pre {
+            background: #0b1120;
+            padding: 1rem;
+            border-radius: 1rem;
+            overflow-x: auto;
+            margin: 1rem 0;
+            border-left: 4px solid #a855f7;
+            font-family: 'Fira Code', monospace;
+            font-size: 0.9rem;
+        }
+
+        .nav-buttons {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            display: flex;
+            gap: 12px;
+            z-index: 200;
+        }
+
+        .nav-btn {
+            background: #1e293bdd;
+            backdrop-filter: blur(8px);
+            border: 1px solid #475569;
+            color: white;
+            font-size: 1.4rem;
+            padding: 0.5rem 1.2rem;
+            border-radius: 40px;
+            cursor: pointer;
+            transition: 0.2s;
+            font-weight: bold;
+        }
+
+        .nav-btn:hover {
+            background: #a855f7;
+            border-color: #c084fc;
+            transform: scale(1.02);
+        }
+
+        .slide-counter {
+            position: fixed;
+            bottom: 20px;
+            left: 20px;
+            background: #0f172aaa;
+            backdrop-filter: blur(8px);
+            padding: 0.3rem 1rem;
+            border-radius: 40px;
+            font-family: monospace;
+            font-size: 0.9rem;
+            z-index: 200;
+        }
+
+        .copy-link-btn {
+            position: fixed;
+            bottom: 20px;
+            left: 120px;
+            background: #0f172aaa;
+            backdrop-filter: blur(8px);
+            padding: 0.3rem 1rem;
+            border-radius: 40px;
+            font-family: monospace;
+            font-size: 0.8rem;
+            z-index: 200;
+            cursor: pointer;
+            border: 1px solid #475569;
+            transition: 0.2s;
+        }
+        .copy-link-btn:hover {
+            background: #a855f7;
+            border-color: #c084fc;
+        }
+
+        .terminal {
+            background: #0c0f1c;
+            border-radius: 1rem;
+            padding: 1rem;
+            font-family: monospace;
+            border: 1px solid #2d3a5e;
+        }
+
+        a {
+            color: #a855f7;
+            text-decoration: none;
+            border-bottom: 1px dashed #a855f7;
+        }
+        a:hover {
+            color: #c084fc;
+            border-bottom: 1px solid #c084fc;
+        }
+
+        @media (max-width: 700px) {
+            .slide { padding: 1.2rem; }
+            h1 { font-size: 2.2rem; }
+            h2 { font-size: 1.5rem; }
+            p, li { font-size: 0.95rem; }
+        }
+    </style>
+</head>
+<body>
+<div class="presentation-container">
+    <div class="slides-wrapper" id="slidesWrapper">
+        <!-- ТИТУЛДЫҚ СЛАЙД -->
+        <div class="slide">
+            <div>
+                <div class="badge">Қазақша презентация</div>
+                <h1>🛡️ Kali Linux<br>Мүмкіндіктері</h1>
+                <p style="font-size:1.2rem;">Киберқауіпсіздік мамандарының басты қаруы — мүмкіндіктер, құралдар, қолдану аясы</p>
+                <div style="margin: 2rem 0 1rem;">
+                    <p>📌 <strong>Орындаған:</strong> [Бегжан Динмухамед]</p>
+                    <p>📚 <strong>Пән:</strong> ОН 2.3 Ұйымның серверлік жабдықтарына қызмет көрсету</p>
+                </div>
+                <p>🔗 <a href="https://www.kali.org" target="_blank">Kali Linux ресми сайты →</a></p>
+                <p style="margin-top:2rem;">◀  ▶  пернелері немесе төменгі батырмалар</p>
+            </div>
+        </div>
+
+        <!-- 1. Кіріспе: KALI LINUX -->
+        <div class="slide">
+            <div>
+                <h2>🔍 Kali Linux дегеніміз не?</h2>
+                <p><strong>Kali Linux</strong> — пентестинг, қауіпсіздік аудиті, цифрлық криминалистика және кері инжинирингке арналған Debian негізіндегі арнайы Linux дистрибутиві.</p>
+                <ul>
+                    <li><strong>Әзірлеуші:</strong> Offensive Security</li>
+                    <li><strong>Алғашқы шығуы:</strong> 2013 жыл (BackTrack ізбасары)</li>
+                    <li><strong>Лицензия:</strong> Толығымен ашық код (GPL)</li>
+                    <li><strong>Қолдау:</strong> ARM, x86, 64-bit, мобильді құрылғылар</li>
+                </ul>
+                <div class="card">
+                    <strong>📢 Ұраны:</strong> «The quieter you become, the more you are able to hear»
+                </div>
+            </div>
+        </div>
+
+        <!-- 2. НЕГІЗГІ МҮМКІНДІКТЕР -->
+        <div class="slide">
+            <div>
+                <h2>⚡ Негізгі мүмкіндіктер</h2>
+                <div class="grid-2">
+                    <div class="card"><strong>🧰 600+ құрал</strong>Metasploit, Nmap, Wireshark, BurpSuite, John the Ripper, Aircrack-ng т.б.</div>
+                    <div class="card"><strong>💿 Live-режим</strong>Орнатпай-ақ USB/DVD-ден жүктеу</div>
+                    <div class="card"><strong>🕶️ Анонимділік</strong>Tor, Proxychains, Anonsurf</div>
+                    <div class="card"><strong>🧪 Forensics</strong>Сот сараптамасы: жад пен дискіні талдау</div>
+                    <div class="card"><strong>🐧 Debian тұрақтылығы</strong>Үнемі қауіпсіздік жаңартулары</div>
+                    <div class="card"><strong>📦 Кастомизация</strong>Kali NetHunter (Android), Kali ARM (Raspberry Pi)</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- 3. ЕҢ ТАНЫМАЛ ҚҰРАЛДАР (әрқайсысына сілтеме) -->
+        <div class="slide">
+            <div>
+                <h2>🔥 Ең танымал 6 құрал</h2>
+                <div class="grid-2">
+                    <div class="card"><strong><a href="https://nmap.org" target="_blank">🔎 Nmap</a></strong> – Желіні сканерлеу, порттар, ОЖ анықтау</div>
+                    <div class="card"><strong><a href="https://www.metasploit.com" target="_blank">🎭 Metasploit</a></strong> – Эксплойттарды басқару, шабуыл жасау</div>
+                    <div class="card"><strong><a href="https://www.openwall.com/john/" target="_blank">🔑 John the Ripper</a></strong> – Парольдерді криптоталдау арқылы бұзу</div>
+                    <div class="card"><strong><a href="https://www.wireshark.org" target="_blank">📡 Wireshark</a></strong> – Пакеттерді ұстау және трафикті талдау</div>
+                    <div class="card"><strong><a href="https://portswigger.net/burp" target="_blank">🌐 Burp Suite</a></strong> – Веб-осалдықтарды сканерлеу</div>
+                    <div class="card"><strong><a href="https://www.aircrack-ng.org" target="_blank">🕸️ Aircrack-ng</a></strong> – Wi-Fi желілерінің қауіпсіздігін тестілеу</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- 4. ПРАКТИКАЛЫҚ МЫСАЛ -->
+        <div class="slide">
+            <div>
+                <h2>💻 Практикалық мысал: Nmap + Kali</h2>
+                <p>Kali Linux-та бір желідегі тірі хосттар мен ашық порттарды анықтау:</p>
+                <pre><code>nmap -sn 192.168.1.0/24       # Ping сканерлеу (тірі хосттар)
+nmap -sS -sV -O 192.168.1.10  # Stealth SYN + қызмет нұсқасы + ОС</code></pre>
+                <div class="terminal">
+                    <span style="color:#4ade80;">user@kali:~$</span> nmap -sV -p 80,443 scanme.nmap.org<br>
+                    <span style="color:#38bdf8;">PORT    STATE SERVICE VERSION</span><br>
+                    80/tcp  open  http    Apache httpd<br>
+                    443/tcp open  ssl     OpenSSL
+                </div>
+                <div class="card"><strong>⚠️ Ескерту:</strong> Тек рұқсат етілген жүйелерде ғана сканерлеңіз!</div>
+            </div>
+        </div>
+
+        <!-- 5. ҚОЛДАНУ САЛАЛАРЫ -->
+        <div class="slide">
+            <div>
+                <h2>🏢 Қолдану салалары</h2>
+                <ul>
+                    <li><strong>Корпоративтік пентест</strong> – кәсіпорын желілерінің осалдығын бағалау</li>
+                    <li><strong>Қорғаныс жүйелерін тестілеу</strong> – IDS/IPS, брандмауэрлерді айналып өту</li>
+                    <li><strong>Криминалистика</strong> – өшірілген деректерді қалпына келтіру</li>
+                    <li><strong>Білім беру</strong> – университеттердегі киберқауіпсіздік зертханалары</li>
+                    <li><strong>Сертификаттау</strong> – OSCP, CEH, GPEN дайындығы</li>
+                </ul>
+                <h2>✅ Артықшылықтары</h2>
+                <ul>
+                    <li>Тегін, ашық код, белсенді қауымдастық</li>
+                    <li>Құралдардың бірыңғай жинағы (орнатумен уақыт жоғалтпайсыз)</li>
+                    <li>Толық құпиялылық режимі (амнезиялық шифрлау)</li>
+                    <li>Мобильді нұсқасы – <a href="https://www.kali.org/get-kali/#kali-nethunter" target="_blank">NetHunter</a></li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- 6. ШЕКТЕУЛЕР -->
+        <div class="slide">
+            <div>
+                <h2>⚠️ Шектеулер және жауапкершілік</h2>
+                <ul>
+                    <li><strong>Жаңа бастаушыларға қиын:</strong> консольді, желілік протоколдарды білу керек</li>
+                    <li><strong>Драйвер мәселелері:</strong> кейбір Wi-Fi адаптерлері нашар жұмыс істейді</li>
+                    <li><strong>Толық ОЖ ретінде қолайсыз:</strong> күнделікті жұмысқа арналмаған</li>
+                    <li><strong>Заңсыз қолдану – қылмыс:</strong> рұқсатсыз сканерлеу ҚР заңы бойынша жауапкершілікке тартады</li>
+                </ul>
+                <div class="card"><strong>📌 Ұсыныс:</strong> Виртуалды машинада (VirtualBox/VMware) қолданыңыз.</div>
+            </div>
+        </div>
+
+        <!-- 7. ЖҮЙЕ ТАЛАПТАРЫ -->
+        <div class="slide">
+            <div>
+                <h2>🖥️ Жүйе талаптары</h2>
+                <ul>
+                    <li>CPU: 64-bit Intel/AMD, 2+ ядро</li>
+                    <li>RAM: кемінде 2 ГБ (4 ГБ+ зертхана үшін)</li>
+                    <li>Диск: 20 ГБ бос орын</li>
+                    <li>Графика: кез келген</li>
+                </ul>
+                <h2>💾 Орнату жолдары</h2>
+                <ol>
+                    <li><strong>Негізгі ОЖ ретінде:</strong> ISO-ны флешкаға жазып, BIOS-тан жүктеу</li>
+                    <li><strong>Виртуалды машина:</strong> VirtualBox → Жаңа VM → ISO таңдау</li>
+                    <li><strong>WSL:</strong> шектеулі, толық мүмкіндік емес</li>
+                    <li><strong>Kali NetHunter:</strong> Rooted Android құрылғыларға</li>
+                </ol>
+            </div>
+        </div>
+
+        <!-- 8. ҚОРЫТЫНДЫ -->
+        <div class="slide">
+            <div>
+                <h2>📌 Қорытынды</h2>
+                <ul>
+                    <li>Kali Linux – пентестер мен қауіпсіздік зерттеушілерінің стандарты</li>
+                    <li>Қуатты құралдар жиынтығы уақытты үнемдейді</li>
+                    <li>Оны меңгеру – киберқауіпсіздік маманы үшін маңызды қадам</li>
+                    <li>Есіңізде болсын: «Қуат үлкен жауапкершілік жүктейді»</li>
+                </ul>
+                <div class="card"><strong>🎯 Білу – қорғанудың бірінші қадамы. Kali Linux сізге желінің осал тұстарын көруге көмектеседі.</strong></div>
+            </div>
+        </div>
+
+        <!-- 9. ДЕРЕККӨЗДЕР (барлығы белсенді сілтеме) -->
+        <div class="slide">
+            <div>
+                <h2>📚 Дереккөздер мен әдебиет</h2>
+                <ul>
+                    <li><a href="https://www.kali.org" target="_blank">Kali Linux ресми сайты</a></li>
+                    <li><a href="https://www.kali.org/download-kali-linux-revealed/" target="_blank">«Kali Linux Revealed» (ашық кітап)</a> — Offensive Security</li>
+                    <li><a href="https://nmap.org/book/" target="_blank">Nmap Network Scanning</a> — Gordon Lyon</li>
+                    <li><a href="https://www.offensive-security.com/metasploit-unleashed/" target="_blank">Metasploit Unleashed</a> — тегін курс</li>
+                    <li><a href="https://adilet.zan.kz/kaz/docs/Z1300000208" target="_blank">ҚР «Ақпараттық қауіпсіздік туралы» Заңы</a></li>
+                </ul>
+                <hr style="margin: 1.5rem 0; border-color: #2d3a5e;">
+                <h2>✨ Назарларыңызға рахмет!</h2>
+                <p>Сұрақтар болса – қойыңыз.<br>Слайдтарды оң/сол пернелермен аралаңыз.</p>
+                <div class="badge">Қорғауға дайын | HTML презентация</div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Навигация -->
+    <div class="nav-buttons">
+        <button class="nav-btn" id="prevBtn">◀</button>
+        <button class="nav-btn" id="nextBtn">▶</button>
+    </div>
+    <div class="slide-counter" id="slideCounter">1 / 9</div>
+    <div class="copy-link-btn" id="copyLinkBtn">🔗 Осы презентацияның сілтемесін көшіру</div>
+</div>
+
+<script>
+    const wrapper = document.getElementById('slidesWrapper');
+    const slides = document.querySelectorAll('.slide');
+    const prev = document.getElementById('prevBtn');
+    const next = document.getElementById('nextBtn');
+    const counterSpan = document.getElementById('slideCounter');
+    let current = 0;
+    const total = slides.length;
+
+    function update() {
+        wrapper.style.transform = `translateX(-${current * 100}%)`;
+        counterSpan.innerText = `${current + 1} / ${total}`;
+    }
+
+    function nextSlide() { if (current < total - 1) { current++; update(); } }
+    function prevSlide() { if (current > 0) { current--; update(); } }
+
+    window.addEventListener('keydown', (e) => {
+        if (e.key === 'ArrowRight') { nextSlide(); e.preventDefault(); }
+        if (e.key === 'ArrowLeft') { prevSlide(); e.preventDefault(); }
+    });
+    prev.addEventListener('click', prevSlide);
+    next.addEventListener('click', nextSlide);
+
+    // touch swipe
+    let touchStart = 0;
+    wrapper.addEventListener('touchstart', (e) => { touchStart = e.changedTouches[0].screenX; });
+    wrapper.addEventListener('touchend', (e) => {
+        const diff = e.changedTouches[0].screenX - touchStart;
+        if (Math.abs(diff) > 50) {
+            if (diff > 0) prevSlide(); else nextSlide();
+        }
+    });
+
+    // Осы беттің сілтемесін көшіру функциясы
+    document.getElementById('copyLinkBtn').addEventListener('click', () => {
+        const url = window.location.href;
+        navigator.clipboard.writeText(url).then(() => {
+            const btn = document.getElementById('copyLinkBtn');
+            const originalText = btn.innerText;
+            btn.innerText = '✅ Көшірілді!';
+            setTimeout(() => { btn.innerText = originalText; }, 2000);
+        }).catch(() => {
+            alert('Сілтемені көшіру мүмкін болмады. Адрес жолын қолмен көшіріңіз: ' + url);
+        });
+    });
+
+    update();
+</script>
+</body>
+</html>
